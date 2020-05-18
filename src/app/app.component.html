@@ -1,14 +1,26 @@
-<ul ngbNav #nav="ngbNav" class="nav-tabs">
-  <li ngbNavItem>
-    <a ngbNavLink routerLink="home">
-      Home
-    </a>
-  </li>
-  <li ngbNavItem>
-    <a ngbNavLink routerLink="portifolio">
-      Portifolio
-    </a>
-  </li>
-</ul>
-<div [ngbNavOutlet]="nav"></div>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <a class="navbar-brand">Administrativo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="statistic" routerLinkActive="active">
+        Estatísticas
+      </a>
+      <a class="nav-item nav-link" routerLink="user" routerLinkActive="active">
+        Usuários
+      </a>
+      <a class="nav-item nav-link" routerLink="beacon" routerLinkActive="active">
+        Beacons
+      </a>
+      <a class="nav-item nav-link" routerLink="login" routerLinkActive="active">
+        Login
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
