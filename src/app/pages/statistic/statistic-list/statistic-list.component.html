@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 mb-4" *ngFor=" let statistc of statistics">
+      <div class="card statistic-card">
+        <div class="container card-title">
+          {{ statistc.name }}
+        </div>
+        <div class="container count-value">
+          <strong>
+            {{ statistc.value }}
+          </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
