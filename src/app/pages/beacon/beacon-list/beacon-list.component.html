@@ -1,0 +1,47 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/statistic">Home</a></li>
+    <li class="breadcrumb-item active">Beacons</li>
+  </ol>
+</nav>
+
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2">
+      Beacons
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="new" class="btn btn-success float-right">
+      Novo
+    </a>
+  </div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr class="bg-primary text-light">
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let beacon of beacons">
+      <td>
+        <strong>{{ beacon.id }}</strong>
+      </td>
+      <td>
+        <strong>{{ beacon.name }}</strong>
+        <br>
+        <small>{{ beacon.description }}</small>
+      </td>
+      <td>
+        <a [routerLink]="[beacon.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">
+          Editar
+        </a>
+        <button class="btn btn-outline-danger btn-sm" (click)="delete(beacon)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

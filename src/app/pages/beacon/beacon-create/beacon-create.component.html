@@ -1,0 +1,63 @@
+
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/statistic">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/beacon">Beacons</a></li>
+    <li class="breadcrumb-item active">{{ currentAction }}</li>
+  </ol>
+</nav>
+
+<div class="row mb-4">
+  <div class="col-md">
+    <h1 class="h2">
+      {{ currentAction }}
+    </h1>
+  </div>
+  <div class="col-md">
+    <a routerLink="/beacon" class="btn btn-success float-right">
+      Voltar
+    </a>
+  </div>
+</div>
+
+<form [formGroup]="beaconForm" (submit)="submit()">
+
+  <div class="card">
+    <div class="card-header">
+      Informações da Beacon
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" formControlName="name">
+          <div class="text-danger" *ngIf="beaconForm.get('name').invalid && beaconForm.get('name').touched">
+            <small *ngIf="beaconForm.get('name').errors.required">Campo Obrigatório</small>
+            <small *ngIf="beaconForm.get('name').errors.minlength">Mínimo 2 caracteres</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-8">
+          <label for="description">Descrição</label>
+          <input type="text" class="form-control" formControlName="description">
+          <div class="text-danger" *ngIf="beaconForm.get('description').invalid && beaconForm.get('description').touched">
+            <small *ngIf="beaconForm.get('description').errors.required">Campo Obrigatório</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-danger mt-3" *ngIf="serverErrorMessages">
+    <ul>
+      <li *ngFor="let error of serverErrorMessages">
+        {{ error }}
+      </li>
+    </ul>
+  </div>
+
+  <button type="submit" class="btn btn-primary float-right mt-3" [disabled]="submittingForm || beaconForm.invalid">
+    Salvar
+  </button>
+
+</form>
