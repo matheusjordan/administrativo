@@ -1,0 +1,29 @@
+<form [formGroup]="loginForm">
+  <div class="card login-card">
+    <img class="card-img-top" src="https://i.pinimg.com/564x/3b/22/be/3b22bef128441ef6c59654f3c764c725.jpg" alt="Card image cap">
+    <div class="card-body">
+      <div class="">
+        <div class="form-group col-md">
+          <label for="username">Usuário</label>
+          <input type="text" class="form-control" formControlName="username">
+          <div class="text-danger" *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched">
+            <small *ngIf="loginForm.get('username').errors.required">Campo Obrigatório</small>
+            <small *ngIf="loginForm.get('username').errors.minlength">Mínimo 2 caracteres</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md">
+          <label for="password">Senha</label>
+          <input type="password" class="form-control" formControlName="password">
+          <div class="text-danger" *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+            <small *ngIf="loginForm.get('password').errors.required">Campo Obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success float-right mt-1" [disabled]="submittingForm || loginForm.invalid">
+        Entrar
+      </button>
+    </div>
+  </div>
+
+</form>
