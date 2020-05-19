@@ -15,11 +15,11 @@
       <a class="nav-item nav-link" routerLink="beacon" routerLinkActive="active">
         Beacons
       </a>
-      <a class="nav-item nav-link" routerLink="login" routerLinkActive="active">
-        Login
-      </a>
     </div>
   </div>
+  <button class="btn btn-light float-right" *ngIf="loggedUser" (click)="logout()">
+    Sair
+  </button>
 </nav>
 <div class="container">
   <router-outlet></router-outlet>

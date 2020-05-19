@@ -9,11 +9,11 @@ import { AuthGuard } from './shared/services/auth.guard';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'prefix' },
+  { path: 'login', loadChildren: () => LoginModule },
   { path: 'statistic', loadChildren: () => StatisticModule, canActivate: [AuthGuard] },
   { path: 'user', loadChildren: () => UserModule, canActivate: [AuthGuard] },
   { path: 'beacon', loadChildren: () => BeaconModule, canActivate: [AuthGuard] },
-  { path: 'login', loadChildren: () => LoginModule },
-  { path: '', redirectTo: 'login', pathMatch: 'prefix' }
 ];
 
 @NgModule({
