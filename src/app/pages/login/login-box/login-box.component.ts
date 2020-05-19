@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../shared/login.service';
 
 @Component({
   selector: 'app-login-box',
@@ -11,12 +12,20 @@ export class LoginBoxComponent implements OnInit {
   submittingForm = false;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
     this.buildLoginForm();
   }
+
+  login() {
+    const formData = this.loginForm.value;
+    this.loginService.doLogin(formData);
+  }
+
+  // PRIVATE METHODS
 
   private buildLoginForm() {
     this.loginForm = this.formBuilder.group({
