@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ToastrModule } from 'ngx-toastr';
 
 import { MemoryDbService } from './shared/services/memory-db-service';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +22,8 @@ import { AuthService } from './shared/services/auth.service';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
 
     HttpClientInMemoryWebApiModule.forRoot(MemoryDbService)
   ],

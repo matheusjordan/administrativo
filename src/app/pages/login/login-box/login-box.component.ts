@@ -21,6 +21,7 @@ export class LoginBoxComponent implements OnInit {
   }
 
   login() {
+    this.submittingForm = true;
     const formData = this.loginForm.value;
     this.loginService.doLogin(formData);
   }

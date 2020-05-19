@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import toastr from 'toastr';
-
 import User from '../shared/user.model';
 import { UserService } from '../shared/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-list',
@@ -14,7 +13,8 @@ export class UserListComponent implements OnInit {
   users: User[] = [];
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class UserListComponent implements OnInit {
   private getUsers() {
     this.userService.getAll().subscribe(
       users => this.users = users,
-      error => alert('Falha ao listar usuários')
+      error => this.toastrService.error('Falha ao listar usuários')
     );
   }
 
@@ -42,9 +42,9 @@ export class UserListComponent implements OnInit {
     this.userService.delete(id).subscribe(
       () => {
         this.getUsers();
-        toastr.success('Usuário excluido com sucesso!');
+        this.toastrService.success('Usuário excluido com sucesso!');
       },
-      error => alert('Falha ao deletar usuário')
+      error => this.toastrService.error('Falha ao deletar usuário')
     );
   }
 }

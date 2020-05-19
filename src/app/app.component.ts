@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from './shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('login');
+    this.toastrService.success('Volte novamente');
   }
 
   verifyLoggedUser() {

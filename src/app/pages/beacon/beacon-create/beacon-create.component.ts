@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import toastr from 'toastr';
+import { Router } from '@angular/router';
+
+import { ToastrService } from 'ngx-toastr';
+
 import Beacon from '../shared/beacon.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BeaconService } from '../shared/beacon.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-beacon-create',
@@ -22,7 +24,8 @@ export class BeaconCreateComponent implements OnInit {
   constructor(
     private beaconService: BeaconService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -94,7 +97,7 @@ export class BeaconCreateComponent implements OnInit {
         this.beacon = beacon;
         this.beaconForm.patchValue(beacon);
       },
-      error => alert('Falha ao buscar beacon')
+      error => this.toastrService.error('Falha ao buscar beacon')
     );
   }
 
@@ -106,7 +109,7 @@ export class BeaconCreateComponent implements OnInit {
   }
 
   private actionsForSucess() {
-    toastr.success(`beacon ${this.isEdit ? 'editado' : 'criado'} com sucesso!`);
+    this.toastrService.success(`Beacon ${this.isEdit ? 'editado' : 'criado'} com sucesso!`);
     this.submittingForm = false;
 
     if (!this.isEdit) {
@@ -115,7 +118,7 @@ export class BeaconCreateComponent implements OnInit {
   }
 
   private actionsForError(error?: any) {
-    toastr.error(`Falha ao ${this.isEdit ? 'editar' : 'criar'} beacon!`);
+    this.toastrService.error(`Falha ao ${this.isEdit ? 'editar' : 'criar'} beacon!`);
     this.submittingForm = false;
 
     if (error) {

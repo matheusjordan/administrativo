@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import toastr from 'toastr';
+import { ToastrService } from 'ngx-toastr';
 
 import User from '../shared/user.model';
 import { UserService } from '../shared/user.service';
@@ -24,7 +24,8 @@ export class UserCreateComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -108,7 +109,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   private actionsForSucess() {
-    toastr.success(`usuário ${this.isEdit ? 'editado' : 'criado'} com sucesso!`);
+    this.toastrService.success(`Usuário ${this.isEdit ? 'editado' : 'criado'} com sucesso!`);
     this.submittingForm = false;
 
     if (!this.isEdit) {
@@ -117,7 +118,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   private actionsForError(error?: any) {
-    toastr.error(`Falha ao ${this.isEdit ? 'editar' : 'criar'} usuário!`);
+    this.toastrService.error(`Falha ao ${this.isEdit ? 'editar' : 'criar'} usuário!`);
     this.submittingForm = false;
 
     if (error) {

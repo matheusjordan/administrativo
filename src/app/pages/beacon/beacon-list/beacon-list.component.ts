@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import toastr from 'toastr';
-
 import { BeaconService } from '../shared/beacon.service';
 import Beacon from '../shared/beacon.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-beacon-list',
@@ -14,7 +13,8 @@ export class BeaconListComponent implements OnInit {
   beacons: Beacon[] = [];
 
   constructor(
-    private beaconService: BeaconService
+    private beaconService: BeaconService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class BeaconListComponent implements OnInit {
   private getBeacons() {
     this.beaconService.getAll().subscribe(
       beacons => this.beacons = beacons,
-      error => alert('Falha ao listar beacons')
+      error => this.toastrService.error('Falha ao listar beacons')
     );
   }
 
@@ -42,9 +42,9 @@ export class BeaconListComponent implements OnInit {
     this.beaconService.delete(id).subscribe(
       () => {
         this.getBeacons();
-        toastr.success('Beacon excluida com sucesso!');
+        this.toastrService.success('Beacon excluida com sucesso!');
       },
-      error => alert('Falha ao deletar categoria')
+      error => this.toastrService.error('Falha ao deletar categoria')
     );
   }
 }
