@@ -58,8 +58,33 @@ export class BeaconCreateComponent implements OnInit {
   private buildBeaconForm() {
     this.beaconForm = this.formBuilder.group({
       id: [null],
-      name: [null, [Validators.required, Validators.minLength(2)]],
-      description: [null, [Validators.required]]
+      code: [null,
+        [
+          Validators.required
+        ]
+      ],
+      name: [null,
+        [
+          Validators.required,
+          Validators.minLength(4)
+        ]
+      ],
+      type: ['none',
+        [
+          Validators.required
+        ]
+      ],
+      content: ['',
+        [
+          Validators.maxLength(500)
+        ]
+      ],
+      legend: [null,
+        [
+          Validators.required,
+          Validators.maxLength(256)
+        ]
+      ]
     });
   }
 

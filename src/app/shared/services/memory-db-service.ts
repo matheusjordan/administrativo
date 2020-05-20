@@ -18,8 +18,8 @@ export class MemoryDbService implements InMemoryDbService {
   private beaconList(): Beacon[] {
     return [
       new Beacon(1, '76498', 'Quadro Monalisa', 'link da imagem', EBeaconType.IMAGE, 'Lorem ipsum dolor simet'),
-      new Beacon(1, '87600', 'Diversidade', 'link do video', EBeaconType.VIDEO, 'Lorem ipsum dolor simet'),
-      new Beacon(1, '43912', 'Jair messias bostonaro', 'link do texto', EBeaconType.TEXT, 'Lorem ipsum dolor simet'),
+      new Beacon(2, '87600', 'Diversidade', 'link do video', EBeaconType.VIDEO, 'Lorem ipsum dolor simet'),
+      new Beacon(3, '43912', 'Jair messias bostonaro', 'link do texto', EBeaconType.TEXT, 'Lorem ipsum dolor simet'),
     ];
   }
 

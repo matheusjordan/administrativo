@@ -24,24 +24,60 @@
 
   <div class="card">
     <div class="card-header">
-      Informações da Beacon
+      Informações do Beacon
     </div>
     <div class="card-body">
       <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
+          <label for="code">Código</label>
+          <input type="text" class="form-control" formControlName="code">
+          <div class="text-danger" *ngIf="beaconForm.get('code').invalid && beaconForm.get('code').touched">
+            <small *ngIf="beaconForm.get('code').errors.required">Campo Obrigatório</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
           <label for="name">Nome</label>
           <input type="text" class="form-control" formControlName="name">
           <div class="text-danger" *ngIf="beaconForm.get('name').invalid && beaconForm.get('name').touched">
             <small *ngIf="beaconForm.get('name').errors.required">Campo Obrigatório</small>
-            <small *ngIf="beaconForm.get('name').errors.minlength">Mínimo 2 caracteres</small>
+            <small *ngIf="beaconForm.get('name').errors.minlength">Mínimo 4 caracteres</small>
           </div>
         </div>
 
-        <div class="form-group col-md-8">
-          <label for="description">Descrição</label>
-          <input type="text" class="form-control" formControlName="description">
-          <div class="text-danger" *ngIf="beaconForm.get('description').invalid && beaconForm.get('description').touched">
-            <small *ngIf="beaconForm.get('description').errors.required">Campo Obrigatório</small>
+        <div class="form-group col-md-3">
+          <label for="type">Tipo de conteúdo</label>
+          <select class="form-control" formControlName="type" [value]="isEdit ? beacon?.type : 'none'">
+            <option value="none">Sem conteúdo</option>
+            <option value="video">Vídeo</option>
+            <option value="image">Imagem</option>
+            <option value="text">Texto</option>
+          </select>
+          <div class="text-danger" *ngIf="beaconForm.get('type').invalid && beaconForm.get('type').touched">
+            <small *ngIf="beaconForm.get('type').errors.required">Campo Obrigatório</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12"
+        *ngIf="beaconForm.get('type').value !== 'none'">
+          <label for="content">Conteúdo</label>
+          <textarea class="form-control"
+            formControlName="content"
+            *ngIf="beaconForm.get('type').value === 'text'">
+          </textarea>
+          <input type="text" class="form-control"
+            formControlName="content"
+            *ngIf="beaconForm.get('type').value !== 'text'">
+          <div class="text-danger" *ngIf="beaconForm.get('content').invalid && beaconForm.get('content').touched">
+            <small *ngIf="beaconForm.get('content').errors.required">Campo Obrigatório</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-12">
+          <label for="legend">Legenda</label>
+          <input type="text" class="form-control" formControlName="legend">
+          <div class="text-danger" *ngIf="beaconForm.get('legend').invalid && beaconForm.get('legend').touched">
+            <small *ngIf="beaconForm.get('legend').errors.required">Campo Obrigatório</small>
           </div>
         </div>
       </div>
