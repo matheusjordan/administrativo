@@ -2,6 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import Beacon from '../../pages/beacon/shared/beacon.model';
 import User from '../../pages/user/shared/user.model';
+import { ERole } from '../enum/role.enum';
 
 export class MemoryDbService implements InMemoryDbService {
 
@@ -25,10 +26,8 @@ export class MemoryDbService implements InMemoryDbService {
 
   private userList(): User[] {
     return [
-      new User(1, 'Monalisa', 'VISITOR', 1),
-      new User(2, 'Matheus', 'VISITOR', 2),
-      new User(3, 'João', 'VISITOR', 3),
-      new User(4, 'Abella', 'ADMIN', 0),
+      new User(1, 'admin', ERole.ADMIN, 'admin'),
+      new User(2, 'user', ERole.USER, 'user'),
     ];
   }
 }

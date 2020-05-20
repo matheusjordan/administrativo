@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { ToastrService } from 'ngx-toastr';
+
 import { LoginService } from '../shared/login.service';
+import { ERole } from '../../../shared/enum/role.enum';
+import User from '../../user/shared/user.model';
 
 @Component({
   selector: 'app-login-box',
@@ -13,7 +19,9 @@ export class LoginBoxComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private toastrService: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +31,13 @@ export class LoginBoxComponent implements OnInit {
   login() {
     this.submittingForm = true;
     const formData = this.loginForm.value;
-    this.loginService.doLogin(formData);
+    this.loginService.doLogin().subscribe(
+      (users) => {
+        this.verifyUserData(users, formData);
+        this.submittingForm = false;
+      },
+      error => this.toastrService.info('Falha no servidor!')
+    )
   }
 
   // PRIVATE METHODS
@@ -35,4 +49,29 @@ export class LoginBoxComponent implements OnInit {
     });
   }
 
+  private verifyUserData(users: User[], formData: any) {
+    let userFound = false;
+
+    users.forEach((user) => {
+      if (user.name === formData.username && user.pass === formData.password) {
+        userFound = true;
+
+        if (user.role !== ERole.ADMIN) {
+          this.toastrService.warning('Área restrita a administradores');
+        } else {
+          this.actionsForSuccessLogin(user);
+        }
+      }
+    })
+
+    if (!userFound) {
+      this.toastrService.warning('Nome do usuário ou senha inválidos')
+    }
+  }
+
+  private actionsForSuccessLogin(user: User) {
+    localStorage.setItem('user', JSON.stringify(user))
+    this.router.navigateByUrl('/statistic');
+    this.toastrService.success(`Bem vindo ${ user.name }`)
+  }
 }
