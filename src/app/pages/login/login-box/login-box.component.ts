@@ -53,7 +53,7 @@ export class LoginBoxComponent implements OnInit {
     let userFound = false;
 
     users.forEach((user) => {
-      if (user.name === formData.username && user.pass === formData.password) {
+      if (user.username === formData.username && user.password === formData.password) {
         userFound = true;
 
         if (user.role !== ERole.ADMIN) {
