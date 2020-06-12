@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="statistic" routerLinkActive="active">
-        Estatísticas
+        Home
       </a>
       <a class="nav-item nav-link" routerLink="user" routerLinkActive="active">
         Usuários
@@ -16,10 +16,10 @@
         Beacons
       </a>
     </div>
+    <button class="btn btn-light float-right exit-btn" *ngIf="loggedUser" (click)="logout()">
+      Sair
+    </button>
   </div>
-  <button class="btn btn-light float-right" *ngIf="loggedUser" (click)="logout()">
-    Sair
-  </button>
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
