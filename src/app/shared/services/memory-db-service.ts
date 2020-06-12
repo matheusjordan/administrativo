@@ -2,6 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 import Beacon from '../../pages/beacon/shared/beacon.model';
 import User from '../../pages/user/shared/user.model';
+import { Visitor } from '../../pages/statistic/shared/statistic.model';
 import { ERole } from '../enum/role.enum';
 import { EBeaconType } from '../enum/beacon-type.enum';
 
@@ -12,7 +13,8 @@ export class MemoryDbService implements InMemoryDbService {
   createDb() {
     let beacons = this.beaconList();
     let users = this.userList();
-    return { beacons, users }
+    let visitors = this.visitorList();
+    return { beacons, users, visitors };
   }
 
   private beaconList(): Beacon[] {
@@ -27,6 +29,16 @@ export class MemoryDbService implements InMemoryDbService {
     return [
       new User(1, 'Administrador', 'admin', 'adm@adm.com', 'admin', ERole.ADMIN),
       new User(2, 'Usuário', 'user', 'user@user.com', 'user', ERole.USER),
+    ];
+  }
+
+  private visitorList(): Visitor[] {
+    return [
+      new Visitor(1234, 'Joao da silva', 'jao@gmail.com', new Date()),
+      new Visitor(4321, 'Maria joaquina', 'maria69@gmail.com', new Date()),
+      new Visitor(3214, 'Cirilo guedes', 'cirilo30cm@gmail.com', new Date()),
+      new Visitor(1432, 'Matheus Jordan', 'mjordan@gmail.com', new Date()),
+      new Visitor(2134, 'Arthur Alves', 'alvesarthur@gmail.com', new Date()),
     ];
   }
 }

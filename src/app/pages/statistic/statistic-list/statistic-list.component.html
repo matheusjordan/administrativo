@@ -1,5 +1,24 @@
+<nav class="mb-5">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">Home</li>
+  </ol>
+</nav>
+
 <div class="container">
-  <div class="row">
+  <div class="row mb-4">
+    <div class="col-md">
+      <h1 class="h2">
+        Visitas {{ showDetails ? '& Estatísticas' : ''}}
+      </h1>
+    </div>
+    <div class="col-md">
+      <button class="btn btn-success float-right" (click)="showDetails = !showDetails">
+        {{ showDetails ? 'Ocultar ' : 'Exibir '}} estatísticas
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showDetails">
     <div class="col-sm-4 mb-4" *ngFor=" let statistc of statistics">
       <div class="card statistic-card">
         <div class="container card-title">
@@ -13,4 +32,32 @@
       </div>
     </div>
   </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr class="bg-primary text-light">
+        <th>Código</th>
+        <th>Usuário</th>
+        <th class="action-col">Data de acesso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visitor of visitors">
+        <td>
+          <strong>{{ visitor.code }}</strong>
+        </td>
+        <td>
+          <strong>{{ visitor.name }}</strong>
+          <br>
+          <small>{{ visitor.email }}</small>
+        </td>
+        <td class="action-data">
+          <strong>{{ visitor.date | date : 'dd/MM/yy' }}</strong>
+          <br>
+          <small>{{ visitor.date | date : 'hh:mm' }}</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

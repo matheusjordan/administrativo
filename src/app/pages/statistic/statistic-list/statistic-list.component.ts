@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Statistic from '../shared/statistic.model';
+import { Statistic, Visitor } from '../shared/statistic.model';
 import { StatisticService } from '../shared/statistic.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { StatisticService } from '../shared/statistic.service';
 export class StatisticListComponent implements OnInit {
 
   statistics: Statistic[] = [];
+  visitors: Visitor[] = [];
+  showDetails = false;
 
   constructor(
     private statistcService: StatisticService
@@ -31,7 +33,14 @@ export class StatisticListComponent implements OnInit {
 
       this.statistcService.getTotalUsers().subscribe(
         (users: any[]) => totalUsers.value = users.length
-      )
+      );
+
+      this.statistcService.getTotalVisitors().subscribe(
+        (visitors: any[]) => {
+          totalVisitors.value = visitors.length;
+          this.visitors = visitors;
+        }
+      );
 
       this.statistics.push(totalUsers, totalBeacons, totalVisitors);
   }
